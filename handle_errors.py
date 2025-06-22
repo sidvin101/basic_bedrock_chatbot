@@ -1,7 +1,5 @@
 
-'''
-This function returns strings based on the error
-'''
+# handles errors for AWS SDK operations
 def handle_error(error):
     if "AccessDenied" in str(error):
         return "Access Denied: You do not have permission to access this resource."
