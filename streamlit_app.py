@@ -2,20 +2,16 @@ import streamlit as st
 import os
 import json
 import boto3
-from dotenv import load_dotenv
 
-# Load environment variables
-load_dotenv()
-
-# Initialize Bedrock client
+# Initialize Bedrock client using st.secrets
 client = boto3.client(
     'bedrock-runtime',
-    region_name=os.getenv('AWS_REGION'),
-    aws_access_key_id=os.getenv('AWS_ACCESS_KEY_ID'),
-    aws_secret_access_key=os.getenv('AWS_SECRET_ACCESS_KEY')
+    region_name=st.secrets["aws"]["region"],
+    aws_access_key_id=st.secrets["aws"]["access_key_id"],
+    aws_secret_access_key=st.secrets["aws"]["secret_access_key"]
 )
 
-MODEL_NAME = os.getenv('MODEL_NAME', 'meta.llama-3-8b-instruct-v1:0')
+MODEL_NAME = st.secrets["aws"].get("model_name", "meta.llama-3-8b-instruct-v1:0")
 
 # Initialize session state
 if "history" not in st.session_state:
