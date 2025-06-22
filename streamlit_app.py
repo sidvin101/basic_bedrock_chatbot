@@ -3,7 +3,7 @@ import os
 import json
 import boto3
 
-# Initialize Bedrock client using st.secrets
+# Initialize Bedrock client using st.secrets instead of dotenv
 client = boto3.client(
     'bedrock-runtime',
     region_name=st.secrets["aws"]["region"],
